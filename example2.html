@@ -1,0 +1,249 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Modal Table Example</title>
+<style>
+  @import url("https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@300&display=swap");
+
+  :root {
+    --bg: #f6f7f9;
+    --surface: #ffffff;
+    --surface-muted: #f1f3f6;
+    --text: #1b1f24;
+    --text-muted: #5a6470;
+    --primary: #000000;
+    --border: #e1e6ee;
+    --border-focus: #9aa3af;
+    --shadow-1: 0 4px 0 rgba(0,0,0,0.04);
+    --radius: 12px;
+
+    --t32: 32px;
+    --t24: 24px;
+    --t20: 20px;
+    --t16: 16px;
+    --t14: 14px;
+
+    --s4: 4px;
+    --s8: 8px;
+    --s12: 12px;
+    --s16: 16px;
+    --s18: 18px;
+    --s25: 25px;
+    --s24: 24px;
+    --s32: 32px;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    font-family: "Atkinson Hyperlegible", Avenir, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+    font-size: var(--t16);
+    font-weight: 300;
+    line-height: 1.5;
+    color: var(--text);
+    background: var(--bg);
+  }
+
+  h1, h2, h3, h4, h5, h6, strong, label, small {
+    font-weight: 300;
+  }
+
+  .table th {
+    font-weight: 500;
+  }
+
+  .page {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: var(--s25);
+  }
+
+  .button {
+    background: var(--primary);
+    color: #fff;
+    border: 1px solid #fff;
+    padding: var(--s12) var(--s18);
+    border-radius: 50px;
+    font-weight: 300;
+    cursor: pointer;
+    font-size: var(--t14);
+  }
+
+  .button.secondary {
+    background: #fff;
+    color: var(--text);
+    border: 1px solid var(--border);
+  }
+
+  .modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.2);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: var(--s25);
+  }
+
+  .modal {
+    width: 100%;
+    max-width: 700px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: var(--s16) var(--s25);
+    box-shadow: var(--shadow-1);
+  }
+
+  .modal h2 {
+    font-size: var(--t20);
+    margin: 0 0 var(--s12);
+  }
+
+  .table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: var(--s8);
+  }
+
+  .table th, .table td {
+    text-align: left;
+    padding: var(--s8) var(--s16);
+    border-bottom: 1px solid var(--border);
+    font-size: var(--t14);
+  }
+
+  .table thead tr {
+    background: #f7f8fa;
+    border-radius: 10px;
+  }
+
+  .table thead th {
+    border-bottom: none;
+  }
+
+  .table thead th:first-child {
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+  }
+
+  .table thead th:last-child {
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+  }
+  .table tr {
+    cursor: pointer;
+  }
+
+  .table-gap td {
+    padding: 0;
+    height: var(--s8);
+    border: 0;
+    background: transparent;
+  }
+
+  .table tr.selected {
+    background: var(--surface-muted);
+    border-left: 1px solid var(--border-focus);
+  }
+
+  .footer-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: var(--s12);
+    margin-top: var(--s16);
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .button {
+      transition: transform 70ms ease, box-shadow 180ms ease, border-color 180ms ease;
+    }
+    .button:hover { transform: translateY(-1px); }
+    .button:active { transform: translateY(2px); }
+    .button.secondary:hover { border-color: var(--border-focus); }
+    .button.secondary:active { background: #f0f2f5; }
+    .button:active:not(.secondary) { background: #fff; color: #000; border: 1px solid var(--border-focus); }
+  }
+</style>
+</head>
+<body>
+  <div class="page">
+    <h1>Example Modal Table</h1>
+    <button class="button" id="openModal">Open modal</button>
+  </div>
+
+  <div class="modal-overlay" id="modalOverlay" aria-hidden="true">
+    <div class="modal" role="dialog" aria-modal="true" aria-label="Select people">
+      <h2>Select people</h2>
+      <table class="table" aria-label="Example names">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Role</th>
+            <th>Team</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="table-gap">
+            <td colspan="3"></td>
+          </tr>
+          <tr>
+            <td>Alex Rivera</td>
+            <td>Designer</td>
+            <td>Product</td>
+          </tr>
+          <tr>
+            <td>Sam Lee</td>
+            <td>Engineer</td>
+            <td>Platform</td>
+          </tr>
+          <tr>
+            <td>Jamie Patel</td>
+            <td>Analyst</td>
+            <td>Ops</td>
+          </tr>
+          <tr>
+            <td>Taylor Kim</td>
+            <td>Manager</td>
+            <td>Support</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="footer-actions">
+        <button class="button secondary" id="cancelModal">Cancel</button>
+        <button class="button" id="saveModal">Save</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const overlay = document.getElementById("modalOverlay");
+    const openBtn = document.getElementById("openModal");
+    const cancelBtn = document.getElementById("cancelModal");
+    const saveBtn = document.getElementById("saveModal");
+    const rows = document.querySelectorAll(".table tbody tr");
+
+    openBtn.addEventListener("click", () => {
+      overlay.style.display = "flex";
+      overlay.setAttribute("aria-hidden", "false");
+    });
+
+    function closeModal() {
+      overlay.style.display = "none";
+      overlay.setAttribute("aria-hidden", "true");
+    }
+
+    cancelBtn.addEventListener("click", closeModal);
+    saveBtn.addEventListener("click", closeModal);
+
+    rows.forEach((row) => {
+      row.addEventListener("click", () => {
+        row.classList.toggle("selected");
+      });
+    });
+  </script>
+</body>
+</html>
