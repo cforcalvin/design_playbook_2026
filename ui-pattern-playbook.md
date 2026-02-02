@@ -77,6 +77,7 @@ Execution checklist:
 - Table header text must use font-weight 500.
 - Table header rows must use a very light grey background instead of an underline.
 - Table header rows must have rounded corners on all edges.
+- Selectable table rows must highlight on hover.
 - All interactive controls must explicitly set `font-size: 14px` or larger
   (buttons, inputs, selects, textareas, tags, pills, menu items).
 - Input and button padding: 12 px on all sides, including default browser
@@ -100,9 +101,10 @@ Execution checklist:
 - Border weight must not exceed 1 px anywhere.
 
 ### Color and contrast
-- Primary action color is black.
+- Primary action color is `#9c5149`.
 - Primary action color must meet AA contrast.
 - Provide neutral backgrounds for readability.
+- Default body background color is `#f2ede9`.
 - Error, warning, success, and info colors must be distinct and labeled.
 - Focused and selected state border colors must be grey (not black).
 - Active steps and open dropdown menus must use grey borders.
@@ -139,9 +141,10 @@ Execution checklist:
 - All destructive actions require undo‑first or explicit confirmation.
 - Provide consistent hover, focus, and pressed states.
 - Secondary buttons: add a grey border on hover and darken background on click.
-- Primary buttons: on click, background switches to white, text switches to black,
-  and border becomes grey.
+- Primary buttons: on click, background switches to white, text switches to slightly
+  darkened grey, and border becomes grey.
 - Primary buttons must have a white border by default.
+- After click, primary button color transition back to default must take 0.3 s.
 - Button click animation: quick downward Y‑axis press with a faster transition
   than hover (e.g., 60–90 ms).
 - Show immediate feedback for user actions.

@@ -8,12 +8,12 @@
   @import url("https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@300&display=swap");
 
   :root {
-    --bg: #f6f7f9;
+    --bg: #f2ede9;
     --surface: #ffffff;
     --surface-muted: #f1f3f6;
     --text: #1b1f24;
     --text-muted: #5a6470;
-    --primary: #000000;
+    --primary: #9c5149;
     --success: #1f8f5f;
     --warning: #c07a00;
     --danger: #c23b3b;
@@ -384,13 +384,14 @@
       transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
     }
     .button {
-      transition: transform 70ms ease, box-shadow 180ms ease, border-color 180ms ease;
+      transition: transform 70ms ease, box-shadow 180ms ease, border-color 180ms ease,
+        background-color 300ms ease, color 300ms ease;
     }
     .button:hover { transform: translateY(-1px); }
     .button:active { transform: translateY(2px); }
     .button.secondary:hover { border-color: var(--border-focus); }
     .button.secondary:active { background: #f0f2f5; }
-    .button:active:not(.secondary) { background: #fff; color: #000; border: 1px solid var(--border-focus); }
+    .button:active:not(.secondary) { background: #fff; color: #555; border: 1px solid var(--border-focus); }
     .dropdown-trigger {
       transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
     }
