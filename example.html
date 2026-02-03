@@ -331,6 +331,19 @@
     overflow: auto;
   }
 
+  .transcript-title {
+    font-style: italic;
+    color: var(--text-muted);
+  }
+
+  .transcript .speaker {
+    color: #9aa3af;
+  }
+
+  .transcript .dialog {
+    color: var(--text);
+  }
+
   .transcript::-webkit-scrollbar {
     width: 10px;
   }
@@ -506,9 +519,9 @@
         <p class="helper">Run a sample call before publish. Results appear instantly.</p>
         <div class="simulator">
           <div class="transcript">
-            <strong>Transcript</strong>
-            <p>User: I need an appointment next Wednesday.</p>
-            <p>Agent: Sure. What time works best?</p>
+            <div class="transcript-title">Transcript</div>
+            <p><span class="speaker">User:</span> <span class="dialog">I need an appointment next Wednesday.</span></p>
+            <p><span class="speaker">Agent:</span> <span class="dialog">Sure. What time works best?</span></p>
           </div>
           <div>
             <strong>Debug summary</strong>

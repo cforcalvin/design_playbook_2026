@@ -105,6 +105,12 @@ Execution checklist:
 - Primary action color must meet AA contrast.
 - Provide neutral backgrounds for readability.
 - Default body background color is `#f2ede9`.
+- Text links: no underline, no background, and use the primary color.
+- Text links: simple color change on hover and active; no inset/press animation.
+- Text links must not show any border.
+- Profile/agent avatars use a small circular gradient (e.g., 44×44) with
+  contrasting colors (blue to pink).
+- Avatar and name blocks in profile rows must align to the top.
 - Error, warning, success, and info colors must be distinct and labeled.
 - Focused and selected state border colors must be grey (not black).
 - Active steps and open dropdown menus must use grey borders.
@@ -794,12 +800,18 @@ tool:
   - Nodes, edges, fallback node.
 - Layout rules + responsive behavior:
   - Canvas with list view fallback for mobile.
+  - Chat interfaces place the input below the conversation window.
+  - Optional typed input must be hidden behind a “Type Instead” link that reveals
+  the input on click. When revealed, the input replaces the link.
+- When optional inputs are revealed, focus them automatically.
 - Interaction rules + motion:
   - Drag to connect, click to edit.
 - States:
   - Standard states from template.
 - Microcopy rules:
   - “If user is unsure, say…”
+  - Transcript formatting: message title in medium grey, speaker label in light
+    grey, dialog in black. Title is italic.
 - Accessibility:
   - Provide list view and keyboard editing.
 - Variants + anti‑patterns:

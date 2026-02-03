@@ -1,0 +1,255 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Talk to an AI Agent</title>
+<style>
+  @import url("https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@300;500&display=swap");
+
+  :root {
+    --bg: #f2ede9;
+    --surface: #ffffff;
+    --surface-muted: #f1f3f6;
+    --text: #1b1f24;
+    --text-muted: #5a6470;
+    --primary: #9c5149;
+    --border: #e1e6ee;
+    --border-focus: #9aa3af;
+    --shadow-1: 0 4px 0 rgba(0,0,0,0.04);
+    --radius: 12px;
+
+    --t32: 32px;
+    --t24: 24px;
+    --t20: 20px;
+    --t16: 16px;
+    --t14: 14px;
+
+    --s4: 4px;
+    --s8: 8px;
+    --s12: 12px;
+    --s16: 16px;
+    --s18: 18px;
+    --s25: 25px;
+    --s24: 24px;
+    --s32: 32px;
+
+    --control-height: 48px;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    font-family: "Atkinson Hyperlegible", Avenir, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+    font-size: var(--t16);
+    font-weight: 300;
+    line-height: 1.5;
+    color: var(--text);
+    background: var(--bg);
+  }
+
+  h1, h2, h3, h4, h5, h6, strong, label, small {
+    font-weight: 300;
+  }
+
+  .page {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: var(--s25);
+  }
+
+  .panel {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: var(--s16) var(--s25);
+    box-shadow: var(--shadow-1);
+  }
+
+  .header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: var(--s16);
+  }
+
+  .pill {
+    display: inline-flex;
+    align-items: center;
+    padding: 6px var(--s16);
+    border-radius: 999px;
+    border: 1px solid var(--border);
+    font-size: var(--t14);
+  }
+
+  .agent-card {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--s16);
+  }
+
+  .avatar {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    border: 1px solid var(--border);
+    overflow: hidden;
+    background: linear-gradient(135deg, #2f6fde 0%, #e857a8 100%);
+  }
+
+  .helper {
+    color: var(--text-muted);
+    font-size: var(--t14);
+    margin: 0 0 var(--s12);
+  }
+
+  .input {
+    width: 100%;
+    padding: var(--s12);
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    background: #fff;
+    font-size: var(--t14);
+    min-height: var(--control-height);
+    height: var(--control-height);
+  }
+
+  .input:focus {
+    outline: none;
+    border: 1px solid var(--border-focus);
+  }
+
+  .link {
+    display: inline-block;
+    font-size: var(--t14);
+    font-weight: 300;
+    color: var(--primary);
+    text-decoration: none;
+    cursor: pointer;
+    background: transparent;
+    border: none;
+  }
+
+  .link:hover {
+    color: #7f423b;
+  }
+
+  .link:active {
+    color: #6b3832;
+  }
+
+  .hidden {
+    display: none;
+  }
+
+  .button {
+    background: var(--primary);
+    color: #fff;
+    border: 1px solid #fff;
+    padding: var(--s12) var(--s18);
+    border-radius: 50px;
+    font-weight: 300;
+    cursor: pointer;
+    font-size: var(--t14);
+    min-height: var(--control-height);
+    height: var(--control-height);
+  }
+
+  .button.secondary {
+    background: #fff;
+    color: var(--text);
+    border: 1px solid var(--border);
+  }
+
+  .actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: var(--s12);
+    margin-top: var(--s16);
+  }
+
+  .transcript {
+    background: var(--surface-muted);
+    border-radius: var(--radius);
+    padding: var(--s8) var(--s12);
+    min-height: 180px;
+    margin-top: var(--s12);
+  }
+
+  .transcript-title {
+    font-style: italic;
+    color: var(--text-muted);
+  }
+
+  .transcript .speaker {
+    color: #9aa3af;
+  }
+
+  .transcript .dialog {
+    color: var(--text);
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .button {
+      transition: transform 70ms ease, box-shadow 180ms ease, border-color 180ms ease,
+        background-color 300ms ease, color 300ms ease;
+    }
+    .button:hover { transform: translateY(-1px); }
+    .button:active { transform: translateY(2px); }
+    .button.secondary:hover { border-color: var(--border-focus); }
+    .button.secondary:active { background: #f0f2f5; }
+    .button:active:not(.secondary) { background: #fff; color: #555; border: 1px solid var(--border-focus); }
+  }
+</style>
+</head>
+<body>
+  <div class="page">
+    <div class="panel">
+      <div class="header">
+        <h1>Talk to an AI Agent</h1>
+        <span class="pill">Status: Ready</span>
+      </div>
+
+      <div class="agent-card">
+        <div class="avatar" role="img" aria-label="Gradient profile"></div>
+        <div>
+          <div>Agent: Appointment Helper</div>
+          <div class="helper">Explain before you ask: This agent can book appointments and answer questions.</div>
+        </div>
+      </div>
+
+      <div class="transcript" aria-label="Transcript">
+        <div class="transcript-title">Transcript</div>
+        <p><span class="speaker">User:</span> <span class="dialog">I need to reschedule my appointment.</span></p>
+        <p><span class="speaker">Agent:</span> <span class="dialog">I can help. What day works best?</span></p>
+      </div>
+
+      <div class="helper" style="margin-top: var(--s16);">Prefer not to speak?</div>
+      <button class="link" id="typeToggle" type="button">Type Instead</button>
+      <div id="typeInput" class="hidden">
+        <input class="input" type="text" placeholder="Type your message..." />
+      </div>
+
+      <div class="actions">
+        <button class="button secondary">End</button>
+        <button class="button">Press to Talk</button>
+      </div>
+    </div>
+  </div>
+  <script>
+    const typeToggle = document.getElementById("typeToggle");
+    const typeInput = document.getElementById("typeInput");
+    typeToggle.addEventListener("click", () => {
+      const isHidden = typeInput.classList.contains("hidden");
+      typeInput.classList.toggle("hidden", !isHidden);
+      typeToggle.classList.toggle("hidden", isHidden);
+      typeToggle.setAttribute("aria-expanded", String(isHidden));
+      if (isHidden) {
+        const input = typeInput.querySelector("input");
+        if (input) input.focus();
+      }
+    });
+  </script>
+</body>
+</html>
