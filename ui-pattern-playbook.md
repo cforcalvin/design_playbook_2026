@@ -67,6 +67,7 @@ Execution checklist:
 - Use a clear hierarchy: 32, 24, 20, 16, 14.
 - Default body size: 16.
 - Line height: 1.5 for body, 1.2 for headings.
+- Large headers should not add extra top/bottom padding.
 
 ### Typography and sizing constraints (hard rules)
 - Font family: "Atkinson Hyperlegible" for all text. Secondary: Avenir.
@@ -111,6 +112,22 @@ Execution checklist:
 - Profile/agent avatars use a small circular gradient (e.g., 44×44) with
   contrasting colors (blue to pink).
 - Avatar and name blocks in profile rows must align to the top.
+
+### Optional dark mode
+- Dark mode is optional but supported via a single toggle.
+- Dark mode must mirror the same spacing, type, and component rules.
+- Use dark surfaces with readable contrast and keep the primary color unchanged.
+- Example token swap (dark mode):
+  - `--bg: #1b1b1b`
+  - `--surface: #232323`
+  - `--surface-muted: #2c2c2c`
+  - `--text: #f2f2f2`
+  - `--text-muted: #b0b0b0`
+  - `--border: #3a3a3a`
+  - `--border-focus: #6f6f6f`
+- All components must have a dark mode equivalent, including inputs, dropdowns,
+  menus, cards, badges, and active step indicators.
+- Table headers must have a dark mode background that preserves contrast.
 - Error, warning, success, and info colors must be distinct and labeled.
 - Focused and selected state border colors must be grey (not black).
 - Active steps and open dropdown menus must use grey borders.
@@ -140,6 +157,8 @@ Execution checklist:
 - Dropdown menus must use equal padding on all sides (8 px).
 - Clicking outside a dropdown must close the menu.
 - Badges must use 16 px left/right padding.
+- Badges must use the shared badge style used in examples (no pill-only variants).
+- Status indicators like “Status: Ready” must use the badge style, not button styling.
 
 ## Interaction Foundations
 
@@ -803,6 +822,7 @@ tool:
   - Chat interfaces place the input below the conversation window.
   - Optional typed input must be hidden behind a “Type Instead” link that reveals
   the input on click. When revealed, the input replaces the link.
+  - When scheduling via chat, show a calendar preview panel with the proposed slot.
 - When optional inputs are revealed, focus them automatically.
 - Interaction rules + motion:
   - Drag to connect, click to edit.
