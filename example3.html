@@ -74,13 +74,18 @@
     margin-bottom: var(--s16);
   }
 
-  .pill {
-    display: inline-flex;
-    align-items: center;
-    padding: 6px var(--s16);
+  .badge {
+    display: inline-block;
+    padding: var(--s4) var(--s16);
     border-radius: 999px;
-    border: 1px solid var(--border);
     font-size: var(--t14);
+    background: #eef3ff;
+    color: #1f4fbf;
+  }
+
+  body.dark .badge {
+    background: #2a2f3a;
+    color: #c7d6ff;
   }
 
   .agent-card {
@@ -162,6 +167,20 @@
     border: 1px solid var(--border);
   }
 
+  body.dark {
+    --bg: #1b1b1b;
+    --surface: #232323;
+    --surface-muted: #2c2c2c;
+    --text: #f2f2f2;
+    --text-muted: #b0b0b0;
+    --border: #3a3a3a;
+    --border-focus: #6f6f6f;
+  }
+
+  body.dark .button.secondary {
+    background: transparent;
+  }
+
   .actions {
     display: flex;
     justify-content: flex-end;
@@ -208,7 +227,10 @@
     <div class="panel">
       <div class="header">
         <h1>Talk to an AI Agent</h1>
-        <span class="pill">Status: Ready</span>
+        <div style="display:flex; align-items:center; gap: var(--s12);">
+          <span class="badge">Status: Ready</span>
+          <button class="button secondary" id="toggleTheme" type="button">Dark mode</button>
+        </div>
       </div>
 
       <div class="agent-card">
@@ -238,6 +260,11 @@
     </div>
   </div>
   <script>
+    const toggleTheme = document.getElementById("toggleTheme");
+    toggleTheme.addEventListener("click", () => {
+      const isDark = document.body.classList.toggle("dark");
+      toggleTheme.textContent = isDark ? "Light mode" : "Dark mode";
+    });
     const typeToggle = document.getElementById("typeToggle");
     const typeInput = document.getElementById("typeInput");
     typeToggle.addEventListener("click", () => {
