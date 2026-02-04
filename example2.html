@@ -78,14 +78,52 @@
     border: 1px solid var(--border);
   }
 
+  .badge {
+    display: inline-block;
+    padding: var(--s4) var(--s16);
+    border-radius: 999px;
+    font-size: var(--t14);
+    background: #eef3ff;
+    color: #1f4fbf;
+  }
+
+  body.dark {
+    --bg: #1b1b1b;
+    --surface: #232323;
+    --surface-muted: #2c2c2c;
+    --text: #f2f2f2;
+    --text-muted: #b0b0b0;
+    --border: #3a3a3a;
+    --border-focus: #6f6f6f;
+  }
+
+  body.dark .button.secondary {
+    background: transparent;
+  }
+
+  body.dark .badge {
+    background: #2a2f3a;
+    color: #c7d6ff;
+  }
+
   .modal-overlay {
     position: fixed;
     inset: 0;
     background: rgba(0,0,0,0.2);
-    display: none;
+    display: flex;
     align-items: center;
     justify-content: center;
     padding: var(--s25);
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: all 200ms ease;
+  }
+
+  .modal-overlay.show {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
   }
 
   .modal {
@@ -121,6 +159,10 @@
     border-radius: 10px;
   }
 
+  body.dark .table thead tr {
+    background: #2c2c2c;
+  }
+
   .table thead th {
     border-bottom: none;
   }
@@ -154,6 +196,10 @@
     border-left: 1px solid var(--border-focus);
   }
 
+  body.dark .table tr.selected {
+    background: var(--surface-muted);
+  }
+
   .transcript-title {
     font-style: italic;
     color: var(--text-muted);
@@ -175,6 +221,11 @@
   }
 
   @media (prefers-reduced-motion: no-preference) {
+  .modal {
+      opacity: 0;
+      transform: scale(0.98);
+      transition: all 200ms ease;
+    }
     .button {
       transition: transform 70ms ease, box-shadow 180ms ease, border-color 180ms ease,
         background-color 300ms ease, color 300ms ease;
@@ -185,11 +236,20 @@
     .button.secondary:active { background: #f0f2f5; }
     .button:active:not(.secondary) { background: #fff; color: #555; border: 1px solid var(--border-focus); }
   }
+
+  .modal-overlay.show .modal {
+    opacity: 1;
+    transform: scale(1);
+  }
 </style>
 </head>
 <body>
   <div class="page">
     <h1>Example Modal Table</h1>
+    <div class="badge" style="margin: var(--s8) 0;">Status: Draft</div>
+    <div style="display:flex; gap: var(--s12); justify-content:flex-end; margin-bottom: var(--s12);">
+      <button class="button secondary" id="toggleTheme" type="button">Dark mode</button>
+    </div>
     <button class="button" id="openModal">Open modal</button>
   </div>
 
@@ -238,19 +298,25 @@
   </div>
 
   <script>
+    const toggleTheme = document.getElementById("toggleTheme");
+    toggleTheme.addEventListener("click", () => {
+      const isDark = document.body.classList.toggle("dark");
+      toggleTheme.textContent = isDark ? "Light mode" : "Dark mode";
+    });
     const overlay = document.getElementById("modalOverlay");
+    const modal = overlay.querySelector(".modal");
     const openBtn = document.getElementById("openModal");
     const cancelBtn = document.getElementById("cancelModal");
     const saveBtn = document.getElementById("saveModal");
     const rows = document.querySelectorAll(".table tbody tr");
 
     openBtn.addEventListener("click", () => {
-      overlay.style.display = "flex";
+      overlay.classList.add("show");
       overlay.setAttribute("aria-hidden", "false");
     });
 
     function closeModal() {
-      overlay.style.display = "none";
+      overlay.classList.remove("show");
       overlay.setAttribute("aria-hidden", "true");
     }
 

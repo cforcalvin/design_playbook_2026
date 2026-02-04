@@ -145,6 +145,7 @@ Execution checklist:
 - Use 150–250 ms for standard transitions.
 - Use skeleton loading for long waits (> 800 ms).
 - Hover states must animate with a short transition (e.g., 120–180 ms).
+- Modals should open/close using CSS `transition: all` with opacity changes.
 - Dropdown menus must animate on open/close (e.g., opacity + small Y shift).
 - Dropdown triggers must show a clear active highlight when opened.
 - Dropdown menus must appear very close to the trigger; use `top: calc(80% + 1px)`
