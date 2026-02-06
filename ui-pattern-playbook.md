@@ -88,6 +88,8 @@ Execution checklist:
 - Buttons must have greater left/right padding than top/bottom padding.
 - All buttons must be fully rounded (pill shape) with a border radius of 50 px
   or more.
+- All buttons must use the primary/secondary button system (no custom styles).
+- Buttons must use the standard control height and padding (match inputs).
 - Modals, content blocks, and pills must have greater left/right padding than
   top/bottom padding.
 - Content wrapper padding that is usually 16 px must be 25 px instead.
@@ -166,6 +168,8 @@ Execution checklist:
 - Every action has a clear affordance (button, link, or card).
 - All destructive actions require undo‑first or explicit confirmation.
 - Provide consistent hover, focus, and pressed states.
+- All buttons and interactive items must include hover, active, and transition
+  states by default (do not wait for explicit prompts).
 - Secondary buttons: add a grey border on hover and darken background on click.
 - Primary buttons: on click, background switches to white, text switches to slightly
   darkened grey, and border becomes grey.
@@ -614,6 +618,170 @@ roles:
 ```yaml
 onboarding:
   steps: ["Choose template", "Connect tools", "Test"]
+```
+
+## Additional UI Components
+
+### Toasts / Notifications
+- Intent + when to use/avoid:
+  - Use for brief, non-blocking feedback.
+  - Avoid for critical errors (use modal).
+- Anatomy:
+  - Title, message, optional action, dismiss.
+- Layout rules + responsive behavior:
+  - Top-right on desktop; bottom on mobile.
+- Interaction rules + motion:
+  - Auto-dismiss after short delay; pause on hover.
+  - Toasts animate in from offscreen right to top-right corner using CSS
+    transition (opacity + X position).
+  - Toasts include a top-right X close control; closing animates out to the
+    right with fade and then removes the toast.
+- States (loading/empty/error/success/disabled):
+  - Success, error, warning, info variants.
+- Microcopy rules:
+  - One sentence; include next action if needed.
+- Accessibility:
+  - Announce via polite live region.
+- Variants + anti-patterns:
+  - Variant: stacked toasts.
+  - Anti-pattern: long paragraphs.
+- Example(s):
+```yaml
+toast:
+  type: "success"
+  title: "Saved"
+  message: "Your changes were saved."
+```
+
+### Tabs
+- Intent + when to use/avoid:
+  - Use for switching related views.
+  - Avoid for primary navigation.
+- Anatomy:
+  - Tab list, tab, panel content.
+- Layout rules + responsive behavior:
+  - Horizontal tabs; wrap on small screens.
+- Interaction rules + motion:
+  - Active tab clearly highlighted.
+- States (loading/empty/error/success/disabled):
+  - Disabled tabs when unavailable.
+- Microcopy rules:
+  - Short labels.
+- Accessibility:
+  - Keyboard arrow navigation and ARIA roles.
+- Variants + anti-patterns:
+  - Variant: icon + label.
+  - Anti-pattern: too many tabs.
+- Example(s):
+```yaml
+tabs:
+  items: ["Overview", "History", "Settings"]
+  active: "Overview"
+```
+
+### Pagination
+- Intent + when to use/avoid:
+  - Use for long lists or tables.
+  - Avoid if infinite scroll is required.
+- Anatomy:
+  - Page numbers, next/previous, total count.
+- Layout rules + responsive behavior:
+  - Compact on mobile.
+- Interaction rules + motion:
+  - Preserve scroll position on page change.
+- States (loading/empty/error/success/disabled):
+  - Disable next/previous at ends.
+- Microcopy rules:
+  - “Page X of Y.”
+- Accessibility:
+  - Focusable buttons and labels.
+- Variants + anti-patterns:
+  - Variant: “Load more.”
+  - Anti-pattern: hidden total count.
+- Example(s):
+```yaml
+pagination:
+  current: 2
+  total_pages: 8
+```
+
+### Date / Time Picker
+- Intent + when to use/avoid:
+  - Use for scheduling and deadlines.
+  - Avoid free‑text dates when precision is needed.
+- Anatomy:
+  - Input field, calendar, time selector.
+- Layout rules + responsive behavior:
+  - Overlay calendar; full-screen picker on mobile.
+- Interaction rules + motion:
+  - Show selected date/time inline.
+- States (loading/empty/error/success/disabled):
+  - Error when invalid date/time.
+- Microcopy rules:
+  - “Select date and time.”
+- Accessibility:
+  - Keyboard selection and labels.
+- Variants + anti-patterns:
+  - Variant: date‑only.
+  - Anti-pattern: ambiguous date format.
+- Example(s):
+```yaml
+datetime:
+  date: "2026-02-05"
+  time: "10:00 AM"
+```
+
+### File Upload
+- Intent + when to use/avoid:
+  - Use for attachments or documents.
+  - Avoid for sensitive data without warnings.
+- Anatomy:
+  - Drop zone, browse button, file list, upload arrow icon.
+- Layout rules + responsive behavior:
+  - Drop zone stacks on mobile.
+- Interaction rules + motion:
+  - Progress indicator per file.
+- States (loading/empty/error/success/disabled):
+  - Error with retry and remove.
+- Microcopy rules:
+  - List allowed types and size.
+- Accessibility:
+  - Keyboard access and labels.
+- Variants + anti-patterns:
+  - Variant: single file only.
+  - Anti-pattern: no size limits shown.
+- Example(s):
+```yaml
+upload:
+  accept: ["pdf", "png"]
+  max_size_mb: 10
+```
+
+### Charts / Metrics
+- Intent + when to use/avoid:
+  - Use for trends and KPIs.
+  - Avoid charts for small data sets (use table).
+- Anatomy:
+  - Title, metric value, chart area, legend.
+- Layout rules + responsive behavior:
+  - Cards in grid; single column on mobile.
+- Interaction rules + motion:
+  - Hover tooltips.
+- States (loading/empty/error/success/disabled):
+  - Skeleton chart while loading.
+- Microcopy rules:
+  - Label units.
+- Accessibility:
+  - Provide text summary of key values.
+- Variants + anti-patterns:
+  - Variant: sparkline only.
+  - Anti-pattern: unlabeled axes.
+- Example(s):
+```yaml
+metric:
+  label: "Appointments booked"
+  value: 128
+  trend: "+12%"
 ```
 
 ## Modal Patterns (8 minimum)

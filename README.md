@@ -13,6 +13,7 @@ A single-file, AI‑ready UI pattern playbook for generating premium, consistent
 - `example2.html` — modal + table example (selectable rows) with transitions.
 - `example3.html` — “Talk to an AI agent” interface with revealable input.
 - `example4.html` — patient chat history + scheduling preview with calendar.
+- `example5.html` — additional components demo with dark mode + toast motion.
 
 ## Quick start
 - Provide `ui-pattern-playbook.md` as the system context to an AI model.
@@ -76,15 +77,18 @@ Include structured YAML, conflict detection, and simulator output.
 - Boxes/modals: more left/right padding than top/bottom.
 
 ### Components
-- Buttons: fully rounded (50px+ radius), 12px padding, right‑aligned groups.
+- Buttons: fully rounded (50px+ radius), 12px padding, standard control height,
+  right‑aligned groups.
 - Dropdowns: overlay menus, close on outside click, gap ≤ 2px.
 - Badges: use shared badge style with 16px left/right padding.
 - Inputs: 12px padding, focus uses 1px grey border (no outline).
+- Interactives: hover/active states + transitions by default (no prompting).
 
 ### Motion
 - Standard transitions: 150–250ms.
 - Buttons: press animation faster than hover.
 - Modals: open/close via CSS `transition: all` with opacity changes.
+- Toasts: slide/fade in from offscreen right; close with X and slide/fade out.
 
 ### Optional dark mode
 - Supported via a single toggle, mirrored spacing/type rules.

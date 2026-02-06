@@ -1,0 +1,409 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Additional Components Demo</title>
+<style>
+  @import url("https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@300;500&display=swap");
+
+  :root {
+    --bg: #f2ede9;
+    --surface: #ffffff;
+    --surface-muted: #f1f3f6;
+    --text: #1b1f24;
+    --text-muted: #5a6470;
+    --primary: #9c5149;
+    --border: #e1e6ee;
+    --border-focus: #9aa3af;
+    --shadow-1: 0 4px 0 rgba(0,0,0,0.04);
+    --radius: 12px;
+
+    --t32: 32px;
+    --t24: 24px;
+    --t20: 20px;
+    --t16: 16px;
+    --t14: 14px;
+
+    --s4: 4px;
+    --s8: 8px;
+    --s12: 12px;
+    --s16: 16px;
+    --s18: 18px;
+    --s25: 25px;
+    --s24: 24px;
+    --s32: 32px;
+
+    --control-height: 48px;
+  }
+
+  body.dark {
+    --bg: #1b1b1b;
+    --surface: #232323;
+    --surface-muted: #2c2c2c;
+    --text: #f2f2f2;
+    --text-muted: #b0b0b0;
+    --border: #3a3a3a;
+    --border-focus: #6f6f6f;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    font-family: "Atkinson Hyperlegible", Avenir, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+    font-size: var(--t16);
+    font-weight: 300;
+    line-height: 1.5;
+    color: var(--text);
+    background: var(--bg);
+  }
+
+  h1 { margin: 0; font-weight: 300; }
+  h2 { margin: 0 0 var(--s8); font-weight: 300; font-size: var(--t20); }
+
+  .page {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: var(--s25);
+  }
+
+  .panel {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: var(--s12) var(--s25);
+    box-shadow: var(--shadow-1);
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--s24);
+  }
+
+  .badge {
+    display: inline-block;
+    padding: var(--s4) var(--s16);
+    border-radius: 999px;
+    font-size: var(--t14);
+    background: #eef3ff;
+    color: #1f4fbf;
+  }
+
+  .button {
+    background: var(--primary);
+    color: #fff;
+    border: 1px solid #fff;
+    padding: var(--s12) var(--s18);
+    border-radius: 50px;
+    font-weight: 300;
+    cursor: pointer;
+    font-size: var(--t14);
+    min-height: var(--control-height);
+    height: var(--control-height);
+    transition: all 180ms ease;
+  }
+
+  .button.secondary {
+    background: #fff;
+    color: var(--text);
+    border: 1px solid var(--border);
+  }
+
+  .button:hover {
+    filter: brightness(0.98);
+  }
+
+  .button:active {
+    transform: translateY(2px);
+    transition: all 80ms ease;
+  }
+
+  .button.secondary:hover {
+    border-color: var(--border-focus);
+  }
+
+  .button.secondary:active {
+    background: #f0f2f5;
+  }
+
+  .button:not(.secondary):active {
+    background: #fff;
+    color: #555;
+    border: 1px solid var(--border-focus);
+    transition: all 300ms ease;
+  }
+
+  body.dark .button.secondary {
+    background: transparent;
+  }
+
+  .tabs {
+    display: flex;
+    gap: var(--s12);
+  }
+
+  .tab {
+    padding: var(--s4) var(--s16);
+    border-radius: 50px;
+    border: 1px solid var(--border);
+    font-size: var(--t14);
+    transition: all 180ms ease;
+  }
+
+  .tab.active {
+    border-color: var(--border-focus);
+    background: var(--surface-muted);
+  }
+
+  .tab:hover {
+    border-color: var(--border-focus);
+  }
+
+  .tab:active {
+    transform: translateY(2px);
+    transition: all 80ms ease;
+  }
+
+  .input {
+    width: 100%;
+    padding: var(--s12);
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    background: #fff;
+    font-size: var(--t14);
+    min-height: var(--control-height);
+    height: var(--control-height);
+    transition: all 180ms ease;
+  }
+
+  .input:focus {
+    outline: none;
+    border: 1px solid var(--border-focus);
+  }
+
+  .upload {
+    border: 1px dashed var(--border);
+    border-radius: 10px;
+    padding: var(--s12) var(--s25);
+    background: var(--surface-muted);
+    display: flex;
+    align-items: center;
+    gap: var(--s8);
+    cursor: pointer;
+    transition: all 180ms ease;
+  }
+
+  .upload:hover {
+    border-color: var(--border-focus);
+  }
+
+  .upload:active {
+    transform: translateY(2px);
+    transition: all 80ms ease;
+  }
+
+  .metric-card {
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: var(--s12) var(--s25);
+    background: var(--surface);
+  }
+
+  .spark {
+    height: 40px;
+    background: linear-gradient(90deg, #e6e9ef 0%, #d7dde6 100%);
+    border-radius: 6px;
+    margin-top: var(--s8);
+  }
+
+  .pagination {
+    display: flex;
+    gap: var(--s8);
+    justify-content: flex-end;
+  }
+
+  .page-btn {
+    padding: var(--s4) var(--s12);
+    border-radius: 50px;
+    border: 1px solid var(--border);
+    font-size: var(--t14);
+    cursor: pointer;
+    transition: all 180ms ease;
+  }
+
+  .page-btn:hover {
+    border-color: var(--border-focus);
+  }
+
+  .page-btn:active {
+    transform: translateY(2px);
+    transition: all 80ms ease;
+  }
+
+  .toast {
+    position: fixed;
+    top: 16px;
+    right: 16px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: var(--s8) var(--s16);
+    box-shadow: var(--shadow-1);
+    opacity: 0;
+    transform: translateX(40px);
+    transition: all 220ms ease;
+    min-width: 220px;
+  }
+
+  .toast.show {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  .toast.hide {
+    opacity: 0;
+    transform: translateX(40px);
+  }
+
+  .toast-close {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    font-size: var(--t14);
+    color: var(--text-muted);
+    border: 1px solid transparent;
+    background: transparent;
+    cursor: pointer;
+    border-radius: 50px;
+    padding: 2px 6px;
+    line-height: 1;
+    transition: all 180ms ease;
+  }
+
+  .toast-close:hover {
+    color: var(--text);
+    border-color: var(--border-focus);
+  }
+
+  .toast-close:active {
+    transform: translateY(2px);
+    transition: all 80ms ease;
+  }
+
+  body.dark .badge {
+    background: #2a2f3a;
+    color: #c7d6ff;
+  }
+
+  body.dark .tab.active {
+    background: var(--surface);
+  }
+
+  body.dark .input {
+    background: var(--surface);
+    color: var(--text);
+  }
+
+  body.dark .upload {
+    background: var(--surface);
+  }
+
+  body.dark .spark {
+    background: linear-gradient(90deg, #3a3a3a 0%, #2c2c2c 100%);
+  }
+</style>
+</head>
+<body>
+  <div class="page">
+    <div class="panel">
+      <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom: var(--s16);">
+        <h1>Additional Components</h1>
+        <div style="display:flex; gap: var(--s12); align-items:center;">
+          <span class="badge">Demo</span>
+          <button class="button secondary" id="toggleTheme" type="button">Dark mode</button>
+        </div>
+      </div>
+
+      <div class="tabs" style="margin-bottom: var(--s16);">
+        <div class="tab active">Overview</div>
+        <div class="tab">History</div>
+        <div class="tab">Settings</div>
+      </div>
+
+      <div class="grid">
+        <div>
+          <h2>Date / Time Picker</h2>
+          <input class="input" type="text" placeholder="Select date and time" />
+        </div>
+        <div>
+          <h2>File Upload</h2>
+          <div class="upload"><span aria-hidden="true">↑</span> Drop files here or click to browse</div>
+        </div>
+      </div>
+
+      <div class="grid" style="margin-top: var(--s24);">
+        <div class="metric-card">
+          <div>Appointments booked</div>
+          <div style="font-size: var(--t24);">128</div>
+          <div class="spark"></div>
+        </div>
+        <div class="metric-card">
+          <div>Avg. wait time</div>
+          <div style="font-size: var(--t24);">6m</div>
+          <div class="spark"></div>
+        </div>
+      </div>
+
+      <div style="margin-top: var(--s24);">
+        <h2>Pagination</h2>
+        <div class="pagination">
+          <div class="page-btn">Prev</div>
+          <div class="page-btn">1</div>
+          <div class="page-btn">2</div>
+          <div class="page-btn">3</div>
+          <div class="page-btn">Next</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast">
+    <span class="toast-close" role="button" tabindex="0" aria-label="Close">×</span>
+    <div style="font-weight: 500;">Saved</div>
+    <div style="font-size: var(--t14);">Your changes were saved.</div>
+  </div>
+
+  <script>
+    const toggleTheme = document.getElementById("toggleTheme");
+    const toast = document.querySelector(".toast");
+    const toastClose = document.querySelector(".toast-close");
+
+    const showToast = () => {
+      requestAnimationFrame(() => toast.classList.add("show"));
+    };
+
+    const closeToast = () => {
+      toast.classList.remove("show");
+      toast.classList.add("hide");
+      setTimeout(() => toast.remove(), 260);
+    };
+
+    toggleTheme.addEventListener("click", () => {
+      const isDark = document.body.classList.toggle("dark");
+      toggleTheme.textContent = isDark ? "Light mode" : "Dark mode";
+    });
+
+    toastClose.addEventListener("click", closeToast);
+    toastClose.addEventListener("keydown", (event) => {
+      if (event.key === "Enter" || event.key === " ") {
+        event.preventDefault();
+        closeToast();
+      }
+    });
+
+    showToast();
+  </script>
+</body>
+</html>
